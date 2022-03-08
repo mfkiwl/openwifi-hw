@@ -21,7 +21,7 @@
 
 # -----------generate openwifi_rev.coe---------------
 set  fd  [open  "openwifi_rev.coe"  w]
-set HASHCODE [exec git log -1 --pretty=%h]
+set HASHCODE [exec ../../get_git_rev.sh]
 puts $fd "memory_initialization_radix=16;"
 puts $fd "memory_initialization_vector="
 puts $fd $HASHCODE,
@@ -41,6 +41,8 @@ if { [info exists ::origin_dir_loc] } {
 
 # Set the project name
 set _xil_proj_name_ "openwifi_zc702_fmcs2"
+exec rm -rf $_xil_proj_name_
+exec git clean -dxf ./src/
 
 # Use project name variable, if specified in the tcl shell
 if { [info exists ::user_project_name] } {
